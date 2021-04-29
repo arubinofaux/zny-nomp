@@ -216,7 +216,7 @@ var spawnPoolWorkers = function(){
             delete poolConfigs[coin];
         } else if (!connection) {
             redisConfig = pcfg.redis;
-            connection = redis.createClient(`rediss://${redisConfig.password}@${redisConfig.host}:${redisConfig.port}`);
+            connection = redis.createClient(`redis://${redisConfig.password}@${redisConfig.host}:${redisConfig.port}`, {tls:{}});
             connection.on('ready', function(){
                 logger.debug('PPLNT', coin, 'TimeShare processing setup with redis (' + redisConfig.host +
                     ':' + redisConfig.port  + ')');

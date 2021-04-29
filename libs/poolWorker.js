@@ -18,7 +18,7 @@ module.exports = function(logger){
 
     var proxySwitch = {};
 
-    var redisClient = redis.createClient(`rediss://${portalConfig.redis.password}@${portalConfig.redis.host}:${portalConfig.redis.port}`);
+    var redisClient = redis.createClient(`redis://${portalConfig.redis.password}@${portalConfig.redis.host}:${portalConfig.redis.port}`, {tls:{}});
     // if (portalConfig.redis.password) {
     //     redisClient.auth(portalConfig.redis.password);
     // }
