@@ -133,10 +133,10 @@ module.exports = function(logger){
     var buildKeyScriptPage = function(){
         async.waterfall([
             function(callback){
-                var client = redis.createClient(portalConfig.redis.port, portalConfig.redis.host);
-                if (portalConfig.redis.password) {
-                    client.auth(portalConfig.redis.password);
-                }
+                var client = redis.createClient(`rediss://${portalConfig.redis.password}@${portalConfig.redis.host}:${portalConfig.redis.port}`);
+                // if (portalConfig.redis.password) {
+                //     client.auth(portalConfig.redis.password);
+                // }
                 client.hgetall('coinVersionBytes', function(err, coinBytes){
                     if (err){
                         client.quit();

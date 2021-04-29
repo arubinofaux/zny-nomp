@@ -26,10 +26,10 @@ module.exports = function(logger, poolConfig){
     var logComponent = coin;
     var logSubCat = 'Thread ' + (parseInt(forkId) + 1);
     
-    var connection = redis.createClient(redisConfig.port, redisConfig.host);
-    if (redisConfig.password) {
-        connection.auth(redisConfig.password);
-    }
+    var connection = redis.createClient(`rediss://${redisConfig.password}@${redisConfig.host}:${redisConfig.port}`);
+    // if (redisConfig.password) {
+    //     connection.auth(redisConfig.password);
+    // }
     connection.on('ready', function(){
         logger.debug(logSystem, logComponent, logSubCat, 'Share processing setup with redis (' + redisConfig.host +
             ':' + redisConfig.port  + ')');

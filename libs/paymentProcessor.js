@@ -83,11 +83,11 @@ function SetupForPool(logger, poolOptions, setupFinished){
     var daemon = new Stratum.daemon.interface([processingConfig.daemon], function(severity, message){
         logger[severity](logSystem, logComponent, message);
     });
-    var redisClient = redis.createClient(poolOptions.redis.port, poolOptions.redis.host);
+    var redisClient = redis.createClient(`rediss://${poolOptions.redis.password}@${poolOptions.redis.host}:${poolOptions.redis.port}`);
     // redis auth if enabled
-    if (poolOptions.redis.password) {
-        redisClient.auth(poolOptions.redis.password);
-    }
+    // if (poolOptions.redis.password) {
+    //     redisClient.auth(poolOptions.redis.password);
+    // }
 
     var magnitude;
     var minPaymentSatoshis;

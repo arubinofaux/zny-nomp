@@ -18,10 +18,10 @@ module.exports = function(logger){
 
     var proxySwitch = {};
 
-    var redisClient = redis.createClient(portalConfig.redis.port, portalConfig.redis.host);
-    if (portalConfig.redis.password) {
-        redisClient.auth(portalConfig.redis.password);
-    }
+    var redisClient = redis.createClient(`rediss://${portalConfig.redis.password}@${portalConfig.redis.host}:${portalConfig.redis.port}`);
+    // if (portalConfig.redis.password) {
+    //     redisClient.auth(portalConfig.redis.password);
+    // }
     //Handle messages from master process sent via IPC
     process.on('message', function(message) {
         switch(message.type){
